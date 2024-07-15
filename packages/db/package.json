@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:generate": "pnpm dlx prisma generate",
-    "db:migrate": "pnpm dlx prisma migrate dev --name added_mcq_problems",
+    "db:migrate": "pnpm dlx prisma migrate reset --force",
     "db:seed": "pnpm dlx prisma db seed",
     "db:question": "ts-node prisma/updateQuestion.ts",
     "db:mcq": "ts-node prisma/createMcq.ts"

@@ -249,13 +249,21 @@ fn main() -> io::Result<()> {
     const functionCall = `result = ${this.functionName}(${this.inputFields.map((field) => field.name).join(", ")})`;
     const outputWrite = `print(result)`;
 
-    return `##USER_CODE_HERE##
+    return `
+    import sys
 
-input = input().split()
-${inputReads}
-${functionCall}
-${outputWrite}
-    `;
+    ##USER_CODE_HERE##
+
+    def main():
+        input = sys.stdin.read().split()
+        ${inputReads}
+        ${functionCall}
+        ${outputWrite}
+
+    if __name__ == "__main__":
+        main()
+
+        `;
   }
 
   mapTypeToPython(type: string): string {
