@@ -1,5 +1,4 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 
 type Option = {
@@ -43,7 +42,7 @@ export default function MCQs() {
 
   return (
     <div>
-      <h1>MCQ Problems</h1>
+      <h1 className='text-center mt-3 text-3xl'>MCQ Problems</h1>
       <ul>
         {mcqs.map((mcq) => (
           <li key={mcq.id}>

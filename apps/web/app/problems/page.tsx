@@ -1,6 +1,7 @@
-import { Problems } from "../../components/Problems";
+import { Problems}  from "../../components/Problems";
+import { getMCQProblems, getProblems } from "../db/problem";
 
-export default function Page(): JSX.Element {
+export default async function Page() {
   return (
     <main>
       <Problems />

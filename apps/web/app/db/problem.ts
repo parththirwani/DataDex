@@ -51,3 +51,29 @@ export const getProblems = async () => {
   });
   return problems;
 };
+
+type MCQProblem = {
+  id: string;
+  question: string;
+  description: string;
+  category: string | null; // Update to allow null
+  options: {
+    id: string;
+    optionText: string;
+    isCorrect: boolean;
+    description: string;
+    mcqProblemId: string;
+  }[];
+};
+
+export const getMCQProblems = async () :Promise<MCQProblem[]>=> {
+  const problems = await db.mCQProblem.findMany({
+    where: {
+      hidden: false,
+    },
+    include: {
+      options: true,
+    },
+  });
+  return problems;
+};

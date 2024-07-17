@@ -162,6 +162,7 @@ model MCQSubmission {
   mcqProblemId   String
   selectedOptionId String
   createdAt      DateTime   @default(now())
+  result         String
   user           User       @relation(fields: [userId], references: [id])
   mcqProblem     MCQProblem @relation(fields: [mcqProblemId], references: [id])
   selectedOption MCQOption  @relation(fields: [selectedOptionId], references: [id])

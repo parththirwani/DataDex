@@ -4,6 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import { Tabs, TabsList, TabsTrigger } from "@repo/ui/tabs";
 import { Button } from '@repo/ui/button';
 import { CardTitle,CardDescription } from '@repo/ui/card';
+import axios from 'axios';
+import { McqISubmission, McqSubmissionTable, SubmissionTable } from '../../../components/SubmissionTable';
+
 
 type MCQOption = {
   id: string;
@@ -17,10 +20,8 @@ type MCQProblem = {
   options: MCQOption[];
 };
 
-export default function MCQ() {
-  const params = useSearchParams();
-  // @ts-ignore
-  const mcqId  = "clymis0mo0000tfxbvpwvo70k";
+export default function MCQ({params: { mcqId }}: {params: {mcqId: string}}
+) {
   console.log(mcqId);
   const [mcq, setMcq] = useState<MCQProblem | null>(null);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -69,17 +70,14 @@ export default function MCQ() {
   };
 
   if (!mcq) return <div>Loading...</div>;
-
-  
     return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="bg-white dark:bg-gray-900 ml-[400px] h-full max-h-[1000px] p-6 w-max-[5000px] items-center justify-center">
-          <div className="grid gap-4 w-full">
-            <div className="grid grid-cols-2 gap-4 w-full">
-              <div>
+      <div className="flex min-h-screen w-full">
+        <div className="bg-white dark:bg-gray-900 h-full max-h-[1000px] p-6 items-center justify-center rounded-lg mt-7  ml-[200px] w-[1300px]">
+            <div className=" grid grid-cols-2 gap-4 w-full ml-[150px] items-start ">
+              <div className=''>
                 <Tabs
                   defaultValue="mcq"
-                  className="rounded-md p-1"
+                  className="rounded-md p-1 "
                   value={activeTab}
                   onValueChange={setActiveTab}
                 >
@@ -91,14 +89,16 @@ export default function MCQ() {
               </div>
             </div>
             {activeTab === "mcq" && (
-              <div>
-                <CardTitle className='mb-3'>{mcq.question}</CardTitle>
+              <div className='ml-[150px]'>
+                <CardTitle className='mb-3 mt-5'>{mcq.question}</CardTitle>
                 <CardDescription className='mb-3'>{mcq.description}</CardDescription>
-                <ul>
+                <div className="flex items-center space-x-2">
+                <ul className=' space-y-2'>
                   {mcq.options.map((option) => (
-                    <li key={option.id}>
-                      <label>
+                    <li key={option.id} >
+                      <label className='hover:cursor-pointer '>
                         <input
+                          className='mr-2'
                           type="radio"
                           name="option"
                           value={option.id}
@@ -109,18 +109,41 @@ export default function MCQ() {
                     </li>
                   ))}
                 </ul>
+                
+                </div>
                 <Button className="mt-3" onClick={handleSubmit}>Submit</Button>
                 {submissionResult && <p>{submissionResult}</p>} {/* Display result message */}
               </div>
             )}
             {activeTab === "submissions" && (
               <div>
-                {/* Add the logic to display submissions */}
-                <p>Submissions will be displayed here.</p>
+                <Submissions mcqId={mcqId}></Submissions>
               </div>
             )}
+            
           </div>
         </div>
-      </div>
+      
+  );
+}
+
+function Submissions({ mcqId }: { mcqId: string }) {
+  const [submissions, setSubmissions] = useState<McqISubmission[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(
+        `/api/mcqs/bulk?mcqId=${mcqId}`
+      );
+      console.log(response.data);
+      setSubmissions(response.data.submissions || []);
+    };
+    fetchData();
+  }, [mcqId]);
+
+  console.log(submissions);
+  return (
+    <div>
+      <McqSubmissionTable submissions={submissions} />
+    </div>
   );
 }

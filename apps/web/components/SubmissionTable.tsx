@@ -12,6 +12,8 @@ import {
   TableCell,
 } from "@repo/ui/table";
 import { CheckIcon, ClockIcon, CircleX } from "lucide-react";
+import { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, AwaitedReactNode } from "react";
+
 export interface ISubmission {
   id: string;
   time: string;
@@ -33,6 +35,10 @@ function getColor(status: string) {
       return "text-green-500";
     case "FAIL":
       return "text-red-500";
+    case "true":
+      return "text-green-500";
+    case "false":
+      return "text-red-500";
     case "TLE":
       return "text-red-500";
     case "COMPILATION_ERROR":
@@ -46,9 +52,13 @@ function getColor(status: string) {
   }
 }
 
-function getIcon(status: string) {
+function getIcon(status: string,) {
   switch (status) {
     case "AC":
+      return <CheckIcon className="h-4 w-4" />;
+    case "false":
+      return <CircleX className="h-4 w-4" />;
+    case "true":
       return <CheckIcon className="h-4 w-4" />;
     case "FAIL":
       return <CircleX className="h-4 w-4" />;
@@ -99,6 +109,48 @@ export function SubmissionTable({
               </TableCell>
               <TableCell>{submission.time}</TableCell>
               <TableCell>{submission.memory}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </div>
+  );
+}
+export interface McqISubmission {
+  id: string;
+  user: { email: string };
+  selectedOption: { optionText: string };
+  createdAt: string;
+  result: string;
+}
+
+
+
+export function McqSubmissionTable({ submissions }: { submissions: McqISubmission[] }) {
+  return (
+    <div className="overflow-x-auto">
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Submission ID</TableHead>
+            <TableHead>User Email</TableHead>
+            <TableHead>Selected Option</TableHead>
+            <TableHead>Result</TableHead>
+            <TableHead>Created At</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {submissions.map((submission) => (
+            <TableRow key={submission.id}>
+              <TableCell>{submission.id.substr(0, 8)}</TableCell>
+              <TableCell className={getColor(submission.user.email)}>
+                {submission.user.email}
+              </TableCell>
+              <TableCell>{submission.selectedOption.optionText}</TableCell>
+              <TableCell className={getColor(submission.result)}>
+                {getIcon(submission.result)}
+              </TableCell>
+              <TableCell>{submission.createdAt}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -1,73 +1,35 @@
 ""
 /* eslint-disable @next/next/no-img-element */
-import Link from "next/link";
-import { SiInstagram, SiYoutube, SiX } from "@icons-pack/react-simple-icons";
-import Image from "next/image";
-import playstore from "../public/playstore.png";
-import Logo from "../public/logo.png";
-
 export const Footer = () => {
   return (
-<div className="bottom-0 w-full p-4 bg-gray-900 dark:bg-slate-900 px-6 lg:px-36 print:hidden">
-      <div className="md:max-w-screen-2xl mt-4 mx-auto flex flex-row items-start justify-between w-full">
-        <div className="flex flex-col md:flex-row w-3/5 md:justify-between">
-          <div className=" ml-21 ">
-            <Link href={"https://app.100xdevs.com/"} target="_blank" rel="noopener noreferrer">
-              <Image src={Logo} alt="Logo" width={300} height={200} className="hover:opacity-80" />
-            </Link>
-          </div>
-          <div className="flex flex-col justify-center my-8 md:my-0">
-            <h3 className="font-semibold text-neutral-100 mb-4">Quick Links</h3>
-            <Link
-              href={"https://app.100xdevs.com/"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 text-neutral-200"
-            >
-              100xdevs
-            </Link>
-            <Link
-              href={"https://github.com/code100x/daily-code/"}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-500 text-neutral-200"
-            >
-              GitHub
-            </Link>
-            <Link href={"/tnc"} className="hover:text-blue-500 text-neutral-200">
-              Terms & Conditions
-            </Link>
-            <Link href={"/privacy-policy"} className="hover:text-blue-500 text-neutral-200">
-              Privacy Policy
-            </Link>
-          </div>
-        </div>
 
-        <div className="flex flex-col justify-center">
-          <Link
-            href={"https://play.google.com/store/apps/details?id=com.hundredx.devs"}
-            target="_blank"
-            className="hover:text-blue-500 font-semibold  text-neutral-200 mb-4"
-          >
-            Download App
-            <Image className="shadow-md mt-2" src={playstore} alt={"playstore"} height={50} width={150} />
-          </Link>
-          <div>
-            <h4 className="text-neutral-200 font-semibold mb-2">Follow us</h4>
-            <div className="flex gap-x-2">
-              <Link target="_blank" rel="noopener noreferrer" href={"https://twitter.com/kirat_tw"}>
-                <SiX className="text-white hover:text-blue-500" />
-              </Link>
-              <Link target="_blank" rel="noopener noreferrer" href={"https://www.instagram.com/kirat_ins/"}>
-                <SiInstagram className="text-white hover:text-blue-500" />
-              </Link>
-              <Link target="_blank" rel="noopener noreferrer" href={"https://www.youtube.com/@harkirat1"}>
-                <SiYoutube className="text-white hover:text-blue-500" />
-              </Link>
-            </div>
-          </div>
+
+<footer className="bg-slate-800 shadow dark:bg-gray-900 text-white">
+    <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div className="sm:flex sm:items-center sm:justify-between">
+            <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                <img src="/Main-logo.png" className="h-8" alt="Flowbite Logo" />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">DataDex</span>
+            </a>
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium  sm:mb-0 dark:text-gray-400 text-white">
+                <li>
+                    <a href="#" className="hover:underline me-4 md:me-6">About</a>
+                </li>
+                <li>
+                    <a href="#" className="hover:underline me-4 md:me-6">Privacy Policy</a>
+                </li>
+                <li>
+                    <a href="#" className="hover:underline me-4 md:me-6">Licensing</a>
+                </li>
+                <li>
+                    <a href="#" className="hover:underline">Contact</a>
+                </li>
+            </ul>
         </div>
-      </div>
+        <hr className="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <span className="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" className="hover:underline">DataDex</a>. All Rights Reserved.</span>
     </div>
+</footer>
   );
-};
+}
+

@@ -278,7 +278,7 @@ export async function POST(req: NextRequest) {
     submissionInput.data.code
   );
   
-  
+    console.log(problem);
   const response = await axios.post(
     `${JUDGE0_URI}/submissions/batch?base64_encoded=false`,
     {

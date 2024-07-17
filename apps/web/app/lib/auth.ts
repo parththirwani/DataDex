@@ -137,4 +137,8 @@ export const authOptions = {
       return newToken;
     },
   },
+  pages: {
+    signIn: "/signin",
+    
+  },
 } satisfies NextAuthOptions;
