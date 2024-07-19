@@ -21,11 +21,11 @@ export function Appbar() {
           Contests
         </Link>
         <Link href="/problems" className="hover:underline" prefetch={false}>
-          Problems
+          Coding
         </Link>
-        {/* <Link href="/mcqs" className="hover:underline" prefetch={false}>
+        <Link href="/mcqs" className="hover:underline" prefetch={false}>
           MCQs
-        </Link> */}
+        </Link>
         {/* <Link href="/standings" className="hover:underline" prefetch={false}>
           Standings
         </Link> */}

@@ -14,9 +14,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from "@repo/ui/button";
 import { use, useEffect, useState } from "react";
 
-export function Problems(
+export function McqProblems(
 ) {
-  const [selected, setSelected] = useState("mcq");
+  
   return (
     <section className="bg-white dark:bg-gray-900 py-8 md:py-12 min-h-screen">
       <div className="container mx-auto px-4 md:px-6">
@@ -28,8 +28,7 @@ export function Problems(
           
         </div>
         <div className="">
-         <ProblemCard></ProblemCard>
-          
+           <McqProblemCard /> 
         </div>
       </div>
     </section>
@@ -37,43 +36,9 @@ export function Problems(
 }
 
 
-
-async function ProblemCard() {
-  const problem = await getProblems()
-  return (
-    <div className="">
-      <Table>
-        <TableHeader >
-          <TableRow className="hover:bg-white">
-          <TableHead>S.No</TableHead>
-            <TableHead>Title</TableHead>
-            <TableHead>Difficulty</TableHead>
-            <TableHead>Submissions</TableHead>
-            <TableHead></TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {problem.map((problem: any,index: number) => (
-            <Link href={`/problem/${problem.id}`} >
-            <TableRow>
-            <TableCell>{index + 1}</TableCell>
-                <TableCell>{problem.title}</TableCell>
-                <TableCell>{problem.difficulty}</TableCell>
-                <TableCell>{problem.solved}</TableCell>
-              </TableRow>
-              </Link>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  );
-}
-
-
-
-function McqProblemCard({ Mcqproblems }: { Mcqproblems: any }) {
-  const router = useRouter();
-  if (!Mcqproblems) return null;
+async function McqProblemCard() {
+  const Mcqproblems = await getMCQProblems()
+  
   return (
     <div className="">
       <Table>

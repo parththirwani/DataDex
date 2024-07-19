@@ -1,12 +1,20 @@
+"use client"
+import { useState } from "react";
 import { Problems}  from "../../components/Problems";
-import { getMCQProblems, getProblems } from "../db/problem";
+import { McqProblems } from "../../components/McqProblems";
+import { Button } from "@repo/ui/button";
 
-export default async function Page() {
+export default function Page() {
+  
   return (
     <main>
-      <Problems />
+      
+            <Problems />
+      
+     
     </main>
   );
 }
 
 export const dynamic = "force-dynamic"
+
